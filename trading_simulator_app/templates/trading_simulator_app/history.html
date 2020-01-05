@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <table class="table">
+            {% if stock %}
+                <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                {% for s in stock %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{ s.symbol }}</th>
+                            <td>{{ s.name }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            {% endif %}
+        </table>
+        <br>
+        <br>
+        <table class="table">
+            {% if buy %}
+                <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Amount bought</th>
+                    <th scope="col">Price bought</th>
+                    <th scope="col">Date bought</th>
+                </tr>
+                {% for b in buy %}
+                    <tr>
+                        <th scope="row">{{ b.symbol }}</th>
+                        <td>{{ b.number_bought }}</td>
+                        <td>{{ b.price_bought }}</td>
+                        <td>{{ b.date_bought }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        <br>
+        <br>
+        <table class="table">
+            {% if sell %}
+                 <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Amount sold</th>
+                    <th scope="col">Price sold</th>
+                    <th scope="col">Date sold</th>
+                 </tr>
+                {% for s in sell %}
+                    <tr>
+                        <th scope="row">{{ s.symbol }}</th>
+                        <td>{{ s.number_sold }}</td>
+                        <td>{{ s.price_sold }}</td>
+                        <td>{{ s.date_sold }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+</body>
+</html>

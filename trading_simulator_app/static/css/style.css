@@ -1,0 +1,121 @@
+html {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.title {
+    font-size: 1.6rem;
+}
+
+.smaller-title {
+    font-size: 1.3rem;
+}
+
+.border-submit {
+    border-left: 2px solid white;
+}
+
+.select {
+    background-color: rgba(51, 58, 64, 0.8);
+}
+
+.bg-select {
+    background-color: rgba(51, 58, 64, 0.8);
+}
+
+.search {
+    cursor: pointer;
+}
+
+.search-button {
+    background-color: rgb(51, 51, 51);
+    border: none;
+}
+
+.border-search-left {
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.border-search-mid {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.border-search-right {
+    border-top: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.result-container-border {
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.select:hover {
+    cursor: pointer;
+    background-color: rgba(51, 58, 64, 0.5);
+}
+
+.bg-black {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.subtitle, .market {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+}
+
+.rotate {
+    cursor: pointer;
+}
+
+.bg-search-black {
+    background-color: rgba(51, 58, 64, 0.8);
+}
+
+.add:hover {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+@keyframes slide-in {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(5%); }
+}
+@-webkit-keyframes slide-in {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(5%); }
+}
+
+.remove:hover {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+}
+@keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-10%); }
+}
+@-webkit-keyframes slide-out {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(-10%); }
+}
+
+.rotate:hover {
+    -webkit-animation:spin 0.5s linear;
+    -moz-animation:spin 0.5s linear;
+    animation:spin 0.5s linear;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(180deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(180deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(180deg); transform:rotate(180deg); } }

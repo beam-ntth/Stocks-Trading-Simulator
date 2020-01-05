@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+    <title>Stock Trading Simulator</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-black border-bottom border-white">
+        <a class="navbar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </a>
+        <a class="navbar-brand mr-auto" href="/"> Stocks Trading Simulator </a>
+        <span class="navbar-brand ml-auto last__updated"> --- </span>
+        <span class="navbar-brand rotate refresh-button"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+    </nav>
+    <div class="container-fluid text-white">
+        <!-- HEADER -->
+        <div class="row text-center bg-black">
+            <div class="col-9 border border-white py-3">
+                <span class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
+                <span class="title">Current Money in Stocks</span>
+            </div>
+            <div class="col-3 border border-white py-3">
+                <a class="title history-btn" href="/transaction-history/"> Transaction History </a>
+            </div>
+        </div>
+        <!-- Shows the data current money -->
+        <div class="row text-center border border-white align-items-center bg-black">
+            <div class="col-9 py-3 title stock__money">
+                $ {% if current %}
+                    {{ current }}
+                {% else %}
+                    -1
+                {% endif %}
+                {% if diff %}
+
+                <span class="{% if sign == 'pos' %}text-success{% else %}text-danger{% endif %}">{% if sign == 'pos' %} +{% else %} -{% endif %}{{ diff }}</span>
+
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- Stocks Search Button -->
+        <form>
+        <div class="row bg-black">
+            <div class="col-9 border-search-left py-3 title">
+                <input class="form-control search__company" type="text" placeholder="Search your favorite company" name="company"> 
+            </div>
+            <div class="col-1 border-search-mid py-3 title">
+                <button class="search search-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+            </div>
+            
+            <div class="col-2 border-search-right py-3 title">
+                <button class="btn btn-outline-light clear-button"> Clear Search</button>
+            </div>
+        </div>
+        </form>
+
+        <!-- Stocks Search Result -->
+        <div class="search-result-container">
+            {% if searches %}
+                {% for search in searches %}
+                    <!-- One row -->
+                    <div class="row px-4 py-2 bg-search-black" data-symbol={{ search.symbol }} data-name={{ search.name }}>
+                        <div class="col-5">
+                            <div class="row">
+                                <span class="title">{{ search.symbol }} <span class="subtitle px-2">{{ search.name }}</span></span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <span class="ml-auto m-3"><span class="market"><b>Market Open</b> - </span>{{ search.marketOpen }}<span class="market"> | <b>Market Close</b></span> - {{ search.marketClose }}<span class="market"> | <b>Time Zone</b> - </span>{{ search.timezone }}</span>
+                        </div>
+                        <div class="col-2 add search add-btn">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <!-- DETAIL HEADER -->
+        <div class="row text-center bg-black">
+            <div class="col-3 border border-white py-3 title">
+                <span class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                Favorite Stocks
+            </div>
+            <div class="col-9 border border-white py-3 title">
+                <span class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                Details of selected stocks
+            </div>
+        </div>
+        <div class="row text-center text-white result-container-border">
+            <!-- Shows all current stocks -->
+            <div class="col-3 result-container-border bg-select">
+                <div class="favorite-container">
+                    
+                </div>
+            </div>
+
+            <!-- Shows details of the user's stock -->
+            <div class="col-9 result-container-border bg-black">
+                <div class="result-container">
+                    {% if result %}
+                    <div class="row">
+                        <span class="title m-3">{{ result.symbol }} <span class="subtitle">{{ result.name }} </span></span>
+                        <span class="ml-auto m-3"><span class="market"><b>At Open</b> - </span>{{ result.open_val }}<span class="market"> | <b>At Close</b></span> - {{ result.close_val }}</span>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <img class="img-fluid" src="../../static/images/{{ result.symbol }}.png">
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="row m-3 align-items-center smaller-title">
+                        <div class="col-2 text-left">Currently Holding</div>
+                        <div class="col-1 text-left">{{ holding }}</div>
+                        <div class="col-3">shares with {{ result.symbol }}</div>
+                        <div class="col-6"></div>
+                    </div>
+                    <div class="row m-3 align-items-center" data-symbol={{ result.symbol }} data-name={{ result.name }} data-close={{ result.close_val }}>
+                        <div class="col-2 text-left smaller-title">Buy or Sell:</div>
+                        <div class="col-4"><input class="form-control stock__amount" type="number" placeholder="Ex: 2000"></div>
+                        <div class="col-4">
+                            <button class="btn btn-success mx-2 buy-btn"> BUY </button>
+                            <button class="btn btn-danger mx-2 sell-btn"> SELL </button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Beam JS -->
+    <script type="text/javascript" src="../../static/js/main.js"></script>
+</body>
+</html>
