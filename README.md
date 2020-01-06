@@ -10,10 +10,10 @@ Front end: HTML/CSS, Bootstrap3, Javascript
 Back end: Python Django
 
 Here is the example of what the application looks like
-![alt text]()
+![alt text](trading_simulator_app/static/images/Front-Page.png)
 
 Here is an example of the outline of my database while I was developing it
-![alt text]()
+![alt text](trading_simulator_app/static/images/Database Outline.png)
 
 Here is the picture of a transaction history table where the user can also download it as a pdf file
-![alt text]()
+![alt text](trading_simulator_app/static/images/Simple_Transaction.png)
