@@ -6,7 +6,7 @@ to calculate and plot a graph for the selected stock.
 
 This application is developed using anaconda virtual environment with Python3.8 and Django2.2.5
 
-Front end: HTML/CSS, Bootstrap3, Javascript
+Front end: HTML/CSS, Bootstrap4, Javascript
 
 Back end: Python Django
 
